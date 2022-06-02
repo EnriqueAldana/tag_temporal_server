@@ -1,0 +1,12 @@
+Json para validar servicios.
+
+{
+
+   "email": "jealdana@gmail.com",
+    "name": "Jesus",
+    "lastname" : "Aldana",
+    "lastname2" : "SAnchez",
+   "phone": "3326471838",
+   "image_path": null,
+   "password": "123456"
+}
