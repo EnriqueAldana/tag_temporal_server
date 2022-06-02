@@ -24,7 +24,7 @@ const keys = require('../config/keys');
              if(isPasswordValid){
                     const token = jwt.sign({id: myUser.id, email: myUser.email},keys.secretOrkey,{});
                     const infoUser = {
-                        id: `${myUser.id}`,
+                        id: `${myUser.id}`, 
                         name: myUser.name,
                         lastname: myUser.lastname,
                         lastname2: myUser.lastname2,
