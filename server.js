@@ -5,6 +5,7 @@ const server = http.createServer(app);
 const logger = require ('morgan');
 const cors = require('cors');
 const passport = require('passport');
+const multer = require('multer');
 /*
 * Importar rutas
 */
@@ -28,11 +29,15 @@ require('./config/passport');
 
 app.disable('x-powered-by');
 
+const upload = multer(
+    { storage: multer.memoryStorage()
+    }
+    );
 
 /*
 * Llamado de  rutas
 */
-userRoutes(app);
+userRoutes(app,upload);
 server.listen(3000,ip || 'localhost', function() {
     console.log('Aplicacion tagTemporal Servidor en Node JS con pid ' + process.pid + ' iniciada...' + ' en el puerto: ' + port);
 

@@ -1,9 +1,13 @@
 const User = require('../models/user');
+const Rol = require('../models/rol');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const keys = require('../config/keys');
-
-;module .exports = {
+const storage = require('../utils/cloud_storage');
+const env = require('../config/env')
+// Fijar el rol de visitante
+const rolVisitante = env.id_rol_visitante;
+module .exports = {
     login(req,res){
         const email = req.body.email;
         const password = req.body.password;
@@ -30,7 +34,8 @@ const keys = require('../config/keys');
                         lastname2: myUser.lastname2,
                         phone: myUser.phone,
                         image_path: myUser.image_path,
-                        session_token: `JWT ${token}`
+                        session_token: `JWT ${token}`,
+                        roles: JSON.parse(myUser.roles)
                     }
                     return res.status(201).json({
                         success: true,
@@ -65,6 +70,45 @@ const keys = require('../config/keys');
                 });
 
             }
+        });
+    },
+    async registerWithImage(req,res) {
+        const user = JSON.parse(req.body.user); // capturar los datos que el request trae
+        
+        const files = req.files;
+        if(files.length > 0 ){
+            const path = `image_${Date.now()}`;
+            const url= await storage(files[0],path);
+            if(url != undefined && url != null){
+                user.image_path= url;
+            }
+        }
+        User.create(user, (err,data)=> {
+            if (err){
+                return res.status(501).json({
+                    success: false,
+                    message: ' Hubo un error con el registro del usuario'
+                });
+            }
+            user.id=  `${data}`;
+            const token = jwt.sign({id: user.id, email: user.email},keys.secretOrkey,{});
+            user.session_token = `JWT ${token}`;
+
+            // Asignar a todo usuario registrado el rol de VISITANTE
+            Rol.create(user.id,rolVisitante, ( err, data) =>{
+                if (err){
+                    return res.status(501).json({
+                        success: false,
+                        message: ' Hubo un error con el registro del usuario'
+                    });
+                }
+
+                return res.status(201).json({
+                    success: true,
+                    message: 'El registro se realizó exitosamente',
+                    data: user
+                });
+            });
         });
     }
 }
