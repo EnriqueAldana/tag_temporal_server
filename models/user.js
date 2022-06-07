@@ -5,7 +5,7 @@ const User= {};
 User.findById = (id,result)=>{
     const sql =`
     SELECT 
-            U.id,
+            CONVERT(U.id, char) AS id,
             U.email,
             U.name,
             U.lastname,
@@ -50,7 +50,7 @@ User.findById = (id,result)=>{
                 console.log('Error:', err)
                 result(err,null);
             }else{
-                console.log('Usuario obtenido ', );
+                console.log('Usuario obtenido ', user[0]);
                 result(null, user[0]);
             }
         }
@@ -106,7 +106,7 @@ User.findByEmail = (email,result)=>{
                 console.log('Error:', err)
                 result(err,null);
             }else{
-                console.log('Usuario obtenido ', user );
+                console.log('Usuario obtenido ', user[0] );
                 result(null, user[0]);
             }
         }
@@ -155,4 +155,78 @@ User.create = async (user, result)=> {
     )
 }
 
+User.update = (user, result) =>{
+    const sql = `
+        UPDATE
+            users
+        SET
+            email = ?,
+            name = ?,
+            lastname = ?,
+            lastname2 = ?,
+            phone = ?,
+            image_path = ?,
+            updated_at = ?
+        
+        WHERE
+            id = ?
+    `;
+    db.query(
+        sql,[
+            user.email,
+            user.name,
+            user.lastname,
+            user.lastname2,
+            user.phone,
+            user.image_path,
+            new Date(),
+            user.id
+        ],
+        (err, res) => {
+            if (err){
+                console.log('Error:', err)
+                result(err,null);
+            }else{
+                console.log('Usuario actualizado:  ', user.id);
+                result(null, user.id);
+            }
+        }
+    )
+}
+
+User.updateWithOutImage = (user, result) =>{
+    const sql = `
+        UPDATE
+            users
+        SET
+            email = ?,
+            name = ?,
+            lastname = ?,
+            lastname2 = ?,
+            phone = ?,
+            updated_at = ?
+        WHERE
+            id = ?
+    `;
+    db.query(
+        sql,[
+            user.email,
+            user.name,
+            user.lastname,
+            user.lastname2,
+            user.phone,
+            new Date(),
+            user.id
+        ],
+        (err, res) => {
+            if (err){
+                console.log('Error:', err)
+                result(err,null);
+            }else{
+                console.log('Usuario actualizado:  ', user.id);
+                result(null, user.id);
+            }
+        }
+    )
+}
 module.exports = User;

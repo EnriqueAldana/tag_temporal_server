@@ -1,3 +1,9 @@
+Pendientes toDo
+
+1.- Variables de configuracion deberan ser Variables de entorno
+2.- Aplicar passport para seguridad de las rutas
+
+
 Json para validar servicios.
 
 {

@@ -29,6 +29,7 @@ module .exports = {
                     const token = jwt.sign({id: myUser.id, email: myUser.email},keys.secretOrkey,{});
                     const infoUser = {
                         id: `${myUser.id}`, 
+                        email: myUser.email,
                         name: myUser.name,
                         lastname: myUser.lastname,
                         lastname2: myUser.lastname2,
@@ -109,6 +110,74 @@ module .exports = {
                     data: user
                 });
             });
+        });
+    },
+    async updateWithImage(req,res) {
+        const user = JSON.parse(req.body.user); // capturar los datos que el request trae
+        console.log('Usuario recibido updateWithImage ', user);
+        const files = req.files;
+        if(files.length > 0 ){
+            const path = `image_${Date.now()}`;
+            const url= await storage(files[0],path);
+            if(url != undefined && url != null){
+                user.image_path= url;
+            }
+        }
+        User.update (user, (err,data)=> {
+            if (err){
+                return res.status(501).json({
+                    success: false,
+                    message: ' Hubo un error con la actualización del usuario'
+                });
+            }
+            User.findById(data,(error,myData) =>{
+                if (err){
+                    return res.status(501).json({
+                        success: false,
+                        message: ' Hubo un error con la actualización del usuario'
+                    });
+                }
+                myData.session_token = user.session_token;
+                myData.roles = JSON.parse(myData.roles);
+                console.log('Usuario retornado updateWithImage ', myData);
+                return res.status(201).json({
+                    success: true,
+                    message: 'El usuario se actualizó exitosamente',
+                    data: myData
+                });
+            });
+            
+        });
+    },
+    async updateWithOutImage(req,res) {
+        const user = req.body; // capturar los datos que el request trae
+        console.log('Usuario recibido updateWithOutImage ', user);
+        User.updateWithOutImage (user, (err,data)=> {
+            if (err){
+                return res.status(501).json({
+                    success: false,
+                    message: ' Hubo un error con la actualización del usuario'
+                });
+            }
+            User.findById(data,(error,myData) =>{ 
+                if (err){
+                    return res.status(501).json({
+                        success: false,
+                        message: ' Hubo un error con la actualización del usuario'
+                    });
+                }
+                console.log('token ', user.session_token);
+                console.log('Objeto por retornar antes de token ', myData);
+                myData.session_token = user.session_token;
+                myData.roles = JSON.parse(myData.roles);
+                console.log('Usuario retornado ', myData);
+                return res.status(201).json({
+                    success: true,
+                    message: 'El usuario se actualizó exitosamente',
+                    data: myData
+                });
+            });
+            
         });
     }
 }
