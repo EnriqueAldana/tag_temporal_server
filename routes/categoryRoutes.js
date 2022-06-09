@@ -8,7 +8,7 @@ module.exports = (app) => {
     // PUT -> Actualizar datos
     // DELETE -> Borrar datos
 
+    app.get('/api/categories/getAll', passport.authenticate('jwt', { session: false}),   categoriesController.getAll);
     app.post('/api/categories/create', passport.authenticate('jwt', { session: false}),   categoriesController.create);
-
 
 }

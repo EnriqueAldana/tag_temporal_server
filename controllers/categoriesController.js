@@ -10,7 +10,8 @@ module.exports = {
             if(err){
                     return res.status(501).json({
                         success: false,
-                        message: ' Hubo un error con el registro de la categoría.'
+                        message: ' Hubo un error con el registro de la categoría.',
+                        error: err
                     });
             }
             return res.status(201).json({
@@ -19,6 +20,18 @@ module.exports = {
                 data: `${id}`  // id de la categoria en caracter
             });
 
+        });
+    },
+    getAll(req,res) {
+        Category.getAll((err,data) =>{
+            if(err){
+                return res.status(501).json({
+                    success: false,
+                    message: ' Hubo un error al listar las categorías.',
+                    error: err
+                });
+            }
+            return res.status(201).json(data );
         });
     }
 }
