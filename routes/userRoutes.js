@@ -13,9 +13,9 @@ module.exports = (app,upload) => {
     app.post('/api/users/login', usersController.login);
 
         // PENDIENTE APLICAR SEGURIDAD
-    //app.put('/api/users/update', passport.authenticate('jwt',{session: false}) ,upload.array('image',1), usersController.updateWithImage);
-    //app.put('/api/users/updateWithOutImage', passport.authenticate('jwt',{session: false}) ,upload.array('image',1), usersController.updateWithOutImage);
-    app.put('/api/users/update' ,upload.array('image',1), usersController.updateWithImage);
-    app.put('/api/users/updateWithOutImage' ,upload.array('image',1), usersController.updateWithOutImage);
+    app.put('/api/users/update', passport.authenticate('jwt',{session: false}) ,upload.array('image',1), usersController.updateWithImage);
+    app.put('/api/users/updateWithOutImage', passport.authenticate('jwt',{session: false}) ,upload.array('image',1), usersController.updateWithOutImage);
+    //app.put('/api/users/update' ,upload.array('image',1), usersController.updateWithImage);
+    //app.put('/api/users/updateWithOutImage' ,upload.array('image',1), usersController.updateWithOutImage);
 
 }

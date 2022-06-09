@@ -26,7 +26,9 @@ module .exports = {
              }
              const isPasswordValid= await bcrypt.compare(password,myUser.password);
              if(isPasswordValid){
-                    const token = jwt.sign({id: myUser.id, email: myUser.email},keys.secretOrkey,{});
+                    //const token = jwt.sign({id: myUser.id, email: myUser.email},keys.secretOrkey,{ expiresIn }); // El token expira donde la variable es un String Eg: 60, "2 days", "10h", "7d"
+                    const token = jwt.sign({id: myUser.id, email: myUser.email},keys.secretOrKey,{}); // El token no expira
+                    
                     const infoUser = {
                         id: `${myUser.id}`, 
                         email: myUser.email,
@@ -92,7 +94,7 @@ module .exports = {
                 });
             }
             user.id=  `${data}`;
-            const token = jwt.sign({id: user.id, email: user.email},keys.secretOrkey,{});
+            const token = jwt.sign({id: user.id, email: user.email},keys.secretOrKey,{});
             user.session_token = `JWT ${token}`;
 
             // Asignar a todo usuario registrado el rol de VISITANTE

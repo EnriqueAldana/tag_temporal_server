@@ -4,6 +4,9 @@ Pendientes toDo
 2.- Aplicar passport para seguridad de las rutas
 
 
+Actualizar carpeta node_modules 
+npm update
+
 Json para validar servicios.
 
 {

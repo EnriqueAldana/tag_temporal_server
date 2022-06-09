@@ -9,8 +9,11 @@ const multer = require('multer');
 /*
 * Importar rutas
 */
-const users = require('./routes/userRoutes');
+
 const userRoutes = require('./routes/userRoutes');
+const categoriesRoutes = require('./routes/categoryRoutes');
+const productRoutes = require('./routes/productRoutes');
+
 const port = process.env.PORT || 3000;
 const ip = '192.168.1.66';
 
@@ -24,8 +27,7 @@ app.use(cors());
 app.use(passport.initialize());
 app.use(passport.session());
 
-require('./config/passport');
-(passport);
+require('./config/passport')(passport);
 
 app.disable('x-powered-by');
 
@@ -38,6 +40,9 @@ const upload = multer(
 * Llamado de  rutas
 */
 userRoutes(app,upload);
+categoriesRoutes(app);
+productRoutes(app, upload);
+
 server.listen(3000,ip || 'localhost', function() {
     console.log('Aplicacion tagTemporal Servidor en Node JS con pid ' + process.pid + ' iniciada...' + ' en el puerto: ' + port);
 

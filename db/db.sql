@@ -113,3 +113,29 @@ PRIMARY KEY(id_user, id_rol)
 INSERT INTO `tag_Temporal`.`user_has_roles` (`id_user`, `id_rol`, `created_at`, `updated_at`) VALUES ('1', '1', '2022-06-03 11:39:34', '2022-06-03 11:39:34');
 INSERT INTO `tag_Temporal`.`user_has_roles` (`id_user`, `id_rol`, `created_at`, `updated_at`) VALUES ('1', '2', '2022-06-03 11:39:34', '2022-06-03 11:39:34');
 INSERT INTO `tag_Temporal`.`user_has_roles` (`id_user`, `id_rol`, `created_at`) VALUES ('1', '3', '2022-06-03 11:39:34');
+
+
+-- Categorias
+
+CREATE TABLE `categories` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `name` varchar(180) NOT NULL,
+  `description` text NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) 
+
+CREATE TABLE products(
+	id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(180) NOT NULL UNIQUE,
+    description TEXT NOT NULL,
+    price DECIMAL NOT NULL,
+    image1 VARCHAR(255) NULL,
+    image2 VARCHAR(255) NULL,
+    image3 VARCHAR(255) NULL,
+    id_category BIGINT NOT NULL,
+    created_at TIMESTAMP(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY(id_category) REFERENCES categories(id) ON UPDATE CASCADE ON DELETE CASCADE
+);
