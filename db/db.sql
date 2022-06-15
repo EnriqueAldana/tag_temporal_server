@@ -52,6 +52,30 @@ updated_at TIMESTAMP(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIM
 INSERT INTO `` (`id`,`email`,`name`,`lastname`,`lastname2`,`phone`,`image_path`,`password`,`created_at`,`updated_at`) 
 VALUES (1,'demo@demo.com','Usuario Demo','Usuario apellido demo','Contraseña E','3326478923','https://firebasestorage.googleapis.com/v0/b/tabtemporal-e066a.appspot.com/o/image_1654274373042?alt=media&token=1f972dcb-36ec-406b-91fd-9b5d5c11951d','$2a$10$upSpf3JcQ557unluvo/TWuS2R24fg9ZS5TLbDiwl7Je2JpTVfSkle','2022-06-03 11:39:34','2022-06-03 11:39:34');
 
+CREATE TABLE address(
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `address_street` varchar(180) NOT NULL,
+  `external_number` varchar(100) NOT NULL,
+  `internal_number` varchar(100) NOT NULL,
+  `neighborhood` varchar(180) NOT NULL,
+  `state` varchar(180) NOT NULL,
+  `country` varchar(180) NOT NULL,
+  `postal_code` varchar(5) NOT NULL,
+  `lat` DOUBLE PRECISION NOT NULL,
+  `lng` DOUBLE PRECISION NOT NULL,
+  `created_at` timestamp NOT NULL,
+  `updated_at` timestamp NOT NULL,
+  `id_user` bigint NOT NULL,
+  `id_company` bigint NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id_user_id_company` (`id_user`,`id_company`),
+  KEY `id_company` (`id_company`),
+  CONSTRAINT `address_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `address_ibfk_2` FOREIGN KEY (`id_company`) REFERENCES `companies` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+)
+
+
+
 
 CREATE TABLE roles(
 id BIGINT PRIMARY KEY AUTO_INCREMENT,
@@ -136,7 +160,7 @@ CREATE TABLE products(
 	id BIGINT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(180) NOT NULL UNIQUE,
     description TEXT NOT NULL,
-    price DECIMAL NOT NULL,
+    price DOUBLE PRECISION NOT NULL,
     image1 VARCHAR(255) NULL,
     image2 VARCHAR(255) NULL,
     image3 VARCHAR(255) NULL,

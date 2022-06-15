@@ -13,6 +13,7 @@ const multer = require('multer');
 const userRoutes = require('./routes/userRoutes');
 const categoriesRoutes = require('./routes/categoryRoutes');
 const productRoutes = require('./routes/productRoutes');
+const addressRoutes = require('./routes/addressRoutes');
 
 const port = process.env.PORT || 3000;
 const ip = '192.168.1.66';
@@ -42,6 +43,7 @@ const upload = multer(
 userRoutes(app,upload);
 categoriesRoutes(app);
 productRoutes(app, upload);
+addressRoutes(app);
 
 server.listen(3000,ip || 'localhost', function() {
     console.log('Aplicacion tagTemporal Servidor en Node JS con pid ' + process.pid + ' iniciada...' + ' en el puerto: ' + port);

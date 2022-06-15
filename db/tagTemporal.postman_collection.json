@@ -1,0 +1,220 @@
+{
+	"info": {
+		"_postman_id": "5f82a574-153d-461e-82da-07ef1a1c01e7",
+		"name": "tagTemporal",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://192.168.1.66:3000/api/users/login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"email\": \"maria@tue.com\",\n   \"password\": \"Maria\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://192.168.1.66:3000/api/users/login",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"66"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://192.168.1.66:3000/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.1.66:3000/",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"66"
+					],
+					"port": "3000",
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/mssofttek-determinacion/add",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": "Content-Type application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\" :100,\n    \"nss\": \"11111111111\",\n    \"aseguradoSolicitud\": {\n        \"nss\" : \"222222\",\n        \"claveTipoSituacionAfiliatoria\": \"NO VIGENTE\",\n        \"fechaBaja\": \"2020-12-31\"\n    },\n    \"detalleCertificacion\": {\n        \"edadAsegurado\": \"53\",\n        \"indicadorRJP\" : true,\n        \"indicadorSuceptibilidadRJP\" : true,\n\t  \"indicadorDiasValidosAnteriores1997\": false,\n\t  \"numDiasCotAntes01071997\": 0,\n        \"numTotalSemRecoLey73\": 400,\n        \"numTotalSemRecoLey97\" : 900,\n        \"totalSemanasRetiroIncapacidad94\": 200,\n        \"totalDiasRetiroTotal09\" : 0,\n        \"indicadorConservacionDerVencidos\": false,\n        \"identificadorReingreso26a29Semanas\": false,\n        \"indentificadorReingreso52a54Semanas\": false\n    },\n    \"curp\": \"XXXX800101HDFXXX09\",\n    \"idDelServicio\": \"1\",\n    \"curpUsuario\": \"DAMA930508HVZZRN05\",\n    \"fechaDeNacimiento\": \"1993-08-05\",\n    \"umf\": \"3\",\n    \"delegacion\": \"2\",\n    \"subdelegacion\": \"2\",\n    \"fechaSiniestro\": \"2020-11-17\",\n    \"invalidez75oMas\": \"N\",\n    \"diasSubsidiados\": \"50\",\n    \"registroPatronal\": \"patronal\",\n    \"municipio\": \"9\",\n    \"confirmacionCertificaicon\": \"false\",\n    \"prestacionSolicitada\": \"2\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/mssofttek-determinacion/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"mssofttek-determinacion",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actualizando Info User con Imagen",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear Categoria",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Autorization",
+						"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzgsImVtYWlsIjoiamVhbGRhbmFAZ21haWwuY29tIiwiaWF0IjoxNjU0NzE3MDA0fQ",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"tag 1 Hra\",\n    \"description\": \"tag vigente por una hora\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://192.168.1.66:3000/api/categories/create",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"66"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"categories",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Categorias",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http:localhost:3000/api/categories/getAll",
+					"host": [
+						"http:localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"categories",
+						"getAll"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Productos x categoria",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear Direccion",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzgsImVtYWlsIjoiamVhbGRhbmFAZ21haWwuY29tIiwiaWF0IjoxNjU0NzE3MDA0fQ.r4L08zgJf4f11m7Ui1sVJaoKkOoUy9Xz9d-Ycpx_xj8",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n\"address_street\": \"La fortuna\",\n\"external_number\": \"2133\",\n\"internal_number\": \" \",\n\"neighborhood\": \"Los treboles Zapopan\",\n\"state\": \"Jalisco\",\n\"country\": \"Mexico\",\n\"postal_code\": \"45200\",\n\"lat\": 20.8235801,\n\"lng\": -103.4389567,\n\"id_user\": 38,\n\"id_company\": 1\n\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://192.168.1.66:3000/api/address/create",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"66"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"address",
+						"create"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
