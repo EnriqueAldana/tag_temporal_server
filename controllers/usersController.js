@@ -20,6 +20,20 @@ module .exports = {
         });
 
     },
+    findVisitorMenByName(req,res){
+        const name= req.params.name;
+
+        User.findVisitorManByName(name,rolVisitante,(err,data) =>{
+            if (err){
+                return res.status(501).json({
+                    success: false,
+                    message: ' Hubo un error al obtener usuarios con rol de visitante'
+                });
+            }
+            return res.status(201).json(data);
+        });
+
+    },
     login(req,res){
         const email = req.body.email;
         const password = req.body.password;

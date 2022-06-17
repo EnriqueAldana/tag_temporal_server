@@ -8,6 +8,8 @@ module.exports = (app,upload) => {
     // PUT -> Actualizar datos
     // DELETE -> Borrar datos
     app.get('/api/users/findVisitorMen', passport.authenticate('jwt',{session: false}) ,usersController.findVisitorMen);
+    app.get('/api/users/findVisitorMenByName/:name', passport.authenticate('jwt',{session: false}) ,usersController.findVisitorMenByName);
+   
     app.post('/api/users/create', usersController.register);
     app.post('/api/users/createWithImage', upload.array('image',1) ,usersController.registerWithImage);
     app.post('/api/users/login', usersController.login);

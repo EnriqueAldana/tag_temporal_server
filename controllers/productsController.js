@@ -18,6 +18,21 @@ module.exports = {
             return res.status(201).json(data );
         });
     },
+    findByNameAndCategory(req,res) {
+        const id_category = req.params.id_category;
+        const name = req.params.name;
+
+        Product.findByNameAndCategory(name,id_category,(err,data) =>{
+            if(err){
+                return res.status(501).json({
+                    success: false,
+                    message: ' Hubo un error al listar los prodctos x categoría y nombre.',
+                    error: err
+                });
+            }
+            return res.status(201).json(data );
+        });
+    },
     create(req, res) {
 
         const product = JSON.parse(req.body.product); // CAPTURO LOS DATOS QUE ME ENVIE EL CLIENTE

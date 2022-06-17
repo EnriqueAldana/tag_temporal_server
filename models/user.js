@@ -41,6 +41,47 @@ User.findVisitorMan = (idRol,result)=>{
     )
 
 }
+User.findVisitorManByName = (name,idRol,result)=>{
+    const sql = `
+    SELECT 
+    CONVERT(U.id, char) AS id,
+    U.email,
+    U.name,
+    U.lastname,
+    U.lastname2,
+    U.image_path,
+    U.phone
+    FROM
+    users AS U
+    INNER JOIN 
+    user_has_roles AS UHR
+    ON
+    UHR.id_user = U.id
+    INNER JOIN
+    roles AS R
+    ON
+    UHR.id_rol = R.id
+    WHERE
+        R.id= ? AND LOWER(U.name) LIKE ?
+    `;
+    db.query(
+        sql,
+        [
+            idRol,
+            `%${name.toLowerCase()}%`
+        ],
+        (err, data) => {
+            if (err){
+                console.log('Error:', err)
+                result(err,null);
+            }else{
+                console.log('Usuarios obtenidos con tol Visitor', data);
+                result(null, data);
+            }
+        }
+    )
+
+}
 User.findById = (id,result)=>{
     const sql =`
     SELECT 
