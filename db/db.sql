@@ -66,12 +66,8 @@ CREATE TABLE address(
   `created_at` timestamp NOT NULL,
   `updated_at` timestamp NOT NULL,
   `id_user` bigint NOT NULL,
-  `id_company` bigint NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `id_user_id_company` (`id_user`,`id_company`),
-  KEY `id_company` (`id_company`),
-  CONSTRAINT `address_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `address_ibfk_2` FOREIGN KEY (`id_company`) REFERENCES `companies` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `address_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 )
 
 
@@ -168,4 +164,31 @@ CREATE TABLE products(
     created_at TIMESTAMP(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY(id_category) REFERENCES categories(id) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE orders(
+  `id` bigint PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `id_resident` BIGINT NOT NULL,
+  `id_visitor` BIGINT NULL,
+  `id_address` BIGINT NOT NULL,
+  `lat` DOUBLE PRECISION ,
+  `lng` DOUBLE PRECISION ,
+  `status` varchar(90) NOT NULL,
+  `timestamp` BIGINT NOT NULL,
+  `created_at` timestamp NOT NULL,
+  `updated_at` timestamp NOT NULL,
+  FOREIGN KEY(id_resident) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY(id_visitor) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY(id_address) REFERENCES `address` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE order_has_products(
+  `id_order` bigint NOT NULL,
+  `id_product` BIGINT NOT NULL,
+  `quantity` BIGINT NULL,
+  `created_at` timestamp NOT NULL,
+  `updated_at` timestamp NOT NULL,
+  PRIMARY KEY(id_order,id_product),
+  FOREIGN KEY(id_order) REFERENCES `orders` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY(id_product) REFERENCES `products` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 );

@@ -8,7 +8,7 @@ module.exports = (app) => {
     // PUT -> Actualizar datos
     // DELETE -> Borrar datos
 
-    app.get('/api/address/getAll', passport.authenticate('jwt', { session: false}),   addressController.getAll);
+    app.get('/api/address/findByUser/:id_user', passport.authenticate('jwt', { session: false}),   addressController.findByUser);
     app.post('/api/address/create', passport.authenticate('jwt', { session: false}),   addressController.create);
 
 }

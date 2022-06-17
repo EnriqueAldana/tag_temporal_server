@@ -8,6 +8,18 @@ const env = require('../config/env')
 // Fijar el rol de visitante
 const rolVisitante = env.id_rol_visitante;
 module .exports = {
+    findVisitorMen(req,res){
+        User.findVisitorMan(rolVisitante,(err,data) =>{
+            if (err){
+                return res.status(501).json({
+                    success: false,
+                    message: ' Hubo un error al obtener usuarios con rol de visitante'
+                });
+            }
+            return res.status(201).json(data);
+        });
+
+    },
     login(req,res){
         const email = req.body.email;
         const password = req.body.password;

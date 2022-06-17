@@ -3,6 +3,44 @@ const { id_developer } = require('../config/env');
 
 const Address = {};
 
+Address.findByUser = (id_user, result) =>{
+    const sql=`
+    SELECT
+            CONVERT(id, char) AS id,
+            address_street ,
+            external_number ,
+            internal_number ,
+            neighborhood ,
+            state,
+            country,
+            postal_code,
+            lat,
+            lng,
+            created_at ,
+            updated_at ,
+            CONVERT(id_user, char) AS id_user 
+        FROM
+            address
+        WHERE
+            id_user = ?
+    `;
+    db.query(
+        sql,
+        id_user,
+        (err, data) => {
+            if (err){
+                console.log('Error:', err)
+                result(err,null);
+            }else{
+                result(null, data);
+            }
+        }
+    )
+
+    
+
+
+}
 Address.getAll = (result) => {
     const sql =`
     SELECT 
@@ -18,8 +56,7 @@ Address.getAll = (result) => {
         lng,
         created_at ,
         updated_at ,
-        id_user ,
-        id_company
+        CONVERT(id_user, char) AS id_user
     FROM
         address
     ORDER BY
@@ -58,11 +95,10 @@ Address.create = (address, result) =>{
         lng,
         created_at ,
         updated_at ,
-        id_user ,
-        id_company
+        id_user 
 
       )
-      VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)
+      VALUES (?,?,?,?,?,?,?,?,?,?,?,?)
     `;
     db.query(
         sql,
@@ -78,8 +114,7 @@ Address.create = (address, result) =>{
             address.lng,
             new Date() ,
             new Date() ,
-            address.id_user ,
-            address.id_company
+            address.id_user 
         ],
         (err, res) => {
             if (err){
