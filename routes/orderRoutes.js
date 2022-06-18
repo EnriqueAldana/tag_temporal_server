@@ -9,6 +9,7 @@ module.exports = (app) => {
     // DELETE -> Borrar datos
 
       app.get('/api/orders/findByStatus/:status', passport.authenticate('jwt', { session: false}),   OrdersController.findByStatus);
+      app.get('/api/orders/findByVisitorAndStatus/:id_visitor/:status', passport.authenticate('jwt', { session: false}),   OrdersController.findByVisitorAndStatus);
       app.post('/api/orders/create', passport.authenticate('jwt', { session: false}),   OrdersController.create);
 
 }

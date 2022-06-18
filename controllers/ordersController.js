@@ -15,6 +15,30 @@ module.exports = {
             for(const d of data){
                 d.address= JSON.parse(d.address);
                 d.resident= JSON.parse(d.resident);
+                d.visitor= JSON.parse(d.visitor);
+                d.products= JSON.parse(d.products);
+            }
+            
+            return res.status(201).json(data);
+
+        });
+    },
+    findByVisitorAndStatus(req,res){
+        const id_visitor = req.params.id_visitor;
+        const status= req.params.status;
+
+        Order.findByVisitorAndStatus(id_visitor,status,(err,data) => {
+            if(err){
+                return res.status(501).json({
+                    success: false,
+                    message: ' Hubo un error al listar las ordenes.',
+                    error: err
+                });
+            }
+            for(const d of data){
+                d.address= JSON.parse(d.address);
+                d.visitor= JSON.parse(d.visitor);
+                d.resident= JSON.parse(d.resident);
                 d.products= JSON.parse(d.products);
             }
             
