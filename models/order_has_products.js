@@ -11,17 +11,21 @@ OrderHasProducts.create = (id_order,id_product,quantity, result) =>{
         id_order,
         id_product,
         quantity,
+        started_date,
+        ended_date,
         created_at,
         updated_at
       )
-      VALUES (?,?,?,?,?)
+      VALUES (?,?,?,?,?,?,?)
     `;
     db.query(
         sql,
         [
             id_order,
             id_product,
-            quantity, 
+            quantity,
+            started_date,
+            ended_date,
             new Date(),
             new Date()
         ],

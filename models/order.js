@@ -178,7 +178,7 @@ Order.findByVisitorAndStatus = (idVisitor,status,result) =>{
         P.id= OHP.id_product
         
      WHERE
-     O.id_resident = ? AND status = ?
+     O.id_visitor = ? AND status = ?
      GROUP BY 
      O.id;
     `;
@@ -235,5 +235,35 @@ Order.create = (order, result) =>{
             }
         }
     )
+}
+Order.updateStatus = (id_order, status, result) => {
+    const sql = `
+        UPDATE 
+            orders
+        SET 
+            status= ? ,
+            updated_at= ?
+        WHERE
+            id= ?
+    
+    `;
+    db.query(
+        sql,[
+            status,
+            new Date(),
+            id_order
+
+        ],
+        (err, res) => {
+            if (err){
+                console.log('Error:', err)
+                result(err,null);
+            }else{
+                  result(null, id_order);
+            }
+        }
+
+    )
+
 }
 module.exports = Order;

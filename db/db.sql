@@ -186,6 +186,8 @@ CREATE TABLE order_has_products(
   `id_order` bigint NOT NULL,
   `id_product` BIGINT NOT NULL,
   `quantity` BIGINT NULL,
+  `started_date` timestamp NOT NULL,
+  `ended_date` timestamp NOT NULL,
   `created_at` timestamp NOT NULL,
   `updated_at` timestamp NOT NULL,
   PRIMARY KEY(id_order,id_product),

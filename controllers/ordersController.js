@@ -61,7 +61,7 @@ module.exports = {
             // To Do 
             // Validar que si viene productos nullos no truene
             for(const product of order.products){
-                await OrderHasProducts.create(id,product.id,product.quantity,(err,id_data)=>{
+                await OrderHasProducts.create(id,product.id,product.quantity,started_date,ended_date,(err,id_data)=>{
                     if(err){
                         return res.status(501).json({
                             success: false,
@@ -90,5 +90,24 @@ module.exports = {
             }
             return res.status(201).json(data );
         });
+    },
+    updateStatus(req,res){
+        const order = req.body;
+        Order.updateStatus(order.id,order.status,(err,id_order)=>{
+            if(err){
+                return res.status(501).json({
+                    success: false,
+                    message: ' Hubo un error al actualizar el estatus de la orden.',
+                    error: err
+                });
+            }
+            return res.status(201).json({
+                success: true,
+                message: 'La orden se actualizó exitosamente',
+                data: `${id_order}`  // id de la orden en caracter
+            });
+        });
+        
+        
     }
 }
