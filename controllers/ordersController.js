@@ -61,7 +61,7 @@ module.exports = {
             // To Do 
             // Validar que si viene productos nullos no truene
             for(const product of order.products){
-                await OrderHasProducts.create(id,product.id,product.quantity,started_date,ended_date,(err,id_data)=>{
+                await OrderHasProducts.create(id,product.id,product.quantity,product.started_date,product.ended_date,(err,id_data)=>{
                     if(err){
                         return res.status(501).json({
                             success: false,

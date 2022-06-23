@@ -4,7 +4,8 @@ const { id_developer } = require('../config/env');
 const OrderHasProducts = {};
 
 
-OrderHasProducts.create = (id_order,id_product,quantity, result) =>{
+OrderHasProducts.create = (id_order,id_product,quantity,started_date,ended_date, result) =>{
+    //ASIGNADO  ENCAMINO VISITADO COMPLETADO
     const sql= `
     INSERT INTO
     order_has_products(
@@ -13,10 +14,11 @@ OrderHasProducts.create = (id_order,id_product,quantity, result) =>{
         quantity,
         started_date,
         ended_date,
+        status_product,
         created_at,
         updated_at
       )
-      VALUES (?,?,?,?,?,?,?)
+      VALUES (?,?,?,?,?,?,?,?)
     `;
     db.query(
         sql,
@@ -26,6 +28,7 @@ OrderHasProducts.create = (id_order,id_product,quantity, result) =>{
             quantity,
             started_date,
             ended_date,
+            'ASIGNADO',
             new Date(),
             new Date()
         ],

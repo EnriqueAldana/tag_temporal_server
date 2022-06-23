@@ -33,6 +33,48 @@ module.exports = {
             return res.status(201).json(data );
         });
     },
+    findByResidentAndStatus(req,res) {
+        const id_resident = req.params.id_resident;
+        const status_product = req.params.status_product;
+
+        Product.findByResidentAndStatus(id_resident,status_product,(err,data) =>{
+            if(err){
+                return res.status(501).json({
+                    success: false,
+                    message: ' Hubo un error al listar los productos x Residente y Estatus.',
+                    error: err
+                });
+            }
+            for(const d of data){
+                d.address= JSON.parse(d.address);
+                d.resident= JSON.parse(d.resident);
+                d.visitor= JSON.parse(d.visitor);
+                d.product= JSON.parse(d.product);
+            }
+            return res.status(201).json(data );
+        });
+    },
+    findByVisitorAndStatus(req,res) {
+        const id_visitor = req.params.id_visitor;
+        const status_product = req.params.status_product;
+
+        Product.findByVisitorAndStatus(id_visitor,status_product,(err,data) =>{
+            if(err){
+                return res.status(501).json({
+                    success: false,
+                    message: ' Hubo un error al listar los productos x Visitante y Estatus.',
+                    error: err
+                });
+            }
+            for(const d of data){
+                d.address= JSON.parse(d.address);
+                d.resident= JSON.parse(d.resident);
+                d.visitor= JSON.parse(d.visitor);
+                d.product= JSON.parse(d.product);
+            }
+            return res.status(201).json(data );
+        });
+    },
     create(req, res) {
 
         const product = JSON.parse(req.body.product); // CAPTURO LOS DATOS QUE ME ENVIE EL CLIENTE
