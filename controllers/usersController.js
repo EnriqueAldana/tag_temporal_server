@@ -194,11 +194,9 @@ module .exports = {
                         message: ' Hubo un error con la actualización del usuario'
                     });
                 }
-                console.log('token ', user.session_token);
-                console.log('Objeto por retornar antes de token ', myData);
                 myData.session_token = user.session_token;
                 myData.roles = JSON.parse(myData.roles);
-                console.log('Usuario retornado ', myData);
+                
                 return res.status(201).json({
                     success: true,
                     message: 'El usuario se actualizó exitosamente',

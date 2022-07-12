@@ -51,6 +51,7 @@ module.exports = {
                 d.visitor= JSON.parse(d.visitor);
                 d.product= JSON.parse(d.product);
             }
+           
             return res.status(201).json(data );
         });
     },

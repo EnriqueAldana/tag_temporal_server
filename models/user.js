@@ -34,7 +34,7 @@ User.findVisitorMan = (idRol,result)=>{
                 console.log('Error:', err)
                 result(err,null);
             }else{
-                console.log('Usuarios obtenidos con tol Visitor', data);
+            
                 result(null, data);
             }
         }
@@ -75,7 +75,7 @@ User.findVisitorManByName = (name,idRol,result)=>{
                 console.log('Error:', err)
                 result(err,null);
             }else{
-                console.log('Usuarios obtenidos con tol Visitor', data);
+            
                 result(null, data);
             }
         }
@@ -130,7 +130,7 @@ User.findById = (id,result)=>{
                 console.log('Error:', err)
                 result(err,null);
             }else{
-                console.log('Usuario obtenido ', user[0]);
+                
                 result(null, user[0]);
             }
         }
@@ -186,7 +186,7 @@ User.findByEmail = (email,result)=>{
                 console.log('Error:', err)
                 result(err,null);
             }else{
-                console.log('Usuario obtenido ', user[0] );
+               
                 result(null, user[0]);
             }
         }
@@ -228,7 +228,7 @@ User.create = async (user, result)=> {
                 console.log('Error:', err)
                 result(err,null);
             }else{
-                console.log('Id del nuevo usuario ', res.insertId);
+              
                 result(null, res.insertId);
             }
         }
@@ -267,7 +267,7 @@ User.update = (user, result) =>{
                 console.log('Error:', err)
                 result(err,null);
             }else{
-                console.log('Usuario actualizado:  ', user.id);
+               
                 result(null, user.id);
             }
         }
@@ -303,7 +303,7 @@ User.updateWithOutImage = (user, result) =>{
                 console.log('Error:', err)
                 result(err,null);
             }else{
-                console.log('Usuario actualizado:  ', user.id);
+               
                 result(null, user.id);
             }
         }

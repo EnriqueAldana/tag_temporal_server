@@ -220,7 +220,7 @@ Order.create = (order, result) =>{
             order.id_resident,
             order.id_visitor,
             order.id_address,
-            'EMITIDO', // 1.- EMITIDO , 2.- PAGADO, 3.- ENCAMINO, 4.- VISITADO, 5.- COMPLETADO 
+            'PAGADO', // 1.- EMITIDO , 2.- PAGADO, 3.- ENCAMINO, 4.- VISITADO, 5.- COMPLETADO 
             Date.now(),
             new Date(),
             new Date()

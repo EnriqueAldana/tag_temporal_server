@@ -7,7 +7,7 @@ Address.findByUser = (id_user, result) =>{
     const sql=`
     SELECT
             CONVERT(id, char) AS id,
-            address_street ,
+            address_street AS address,
             external_number ,
             internal_number ,
             neighborhood ,
@@ -103,7 +103,7 @@ Address.create = (address, result) =>{
     db.query(
         sql,
         [
-            address.address_street ,
+            address.address ,
             address.external_number ,
             address.internal_number ,
             address.neighborhood ,

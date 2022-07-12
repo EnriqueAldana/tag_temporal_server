@@ -28,7 +28,7 @@ Product.findByCategory = (id_category, result) =>{
                 result(err, null);
             }
             else {
-                console.log('Lista de productos x categoria: ', res);
+                //console.log('Lista de productos x categoria: ', res);
                 result(null, res);
             }
         }
@@ -65,7 +65,7 @@ Product.findByNameAndCategory = (name,id_category, result) =>{
                 result(err, null);
             }
             else {
-                console.log('Lista de productos x categoria y nombre: ', res);
+                //console.log('Lista de productos x categoria y nombre: ', res);
                 result(null, res);
             }
         }
@@ -168,9 +168,7 @@ Product.findByVisitorAndStatus = (id_visitor,status_product, result) =>{
                 result(err, null);
             }
             else {
-                console.log('Lista de productos x Visitante y Estatus:');
-                console.log('idVisitante: ' + id_visitor + ' estatus: '+status_product);
-                console.log('Elementos ', res);
+               
                 result(null, res);
             }
         }
@@ -273,9 +271,7 @@ Product.findByResidentAndStatus = (id_resident,status_product, result) =>{
                 result(err, null);
             }
             else {
-                console.log('Lista de productos x Residente y Estatus:');
-                console.log('idResidente: ' + id_resident + ' estatus: '+status_product);
-                console.log('Elementos ', res);
+                
                 result(null, res);
             }
         }
@@ -321,7 +317,7 @@ Product.create = (product, result) => {
                 result(err, null);
             }
             else {
-                console.log('Id de la nuevo producto:', res.insertId);
+               // console.log('Id de la nuevo producto:', res.insertId);
                 result(null, res.insertId);
             }
         }
@@ -369,7 +365,7 @@ Product.update = (product, result) => {
                 result(err, null);
             }
             else {
-                console.log('Id del producto actualizado:', product.id);
+               // console.log('Id del producto actualizado:', product.id);
                 result(null, product.id);
             }
         }

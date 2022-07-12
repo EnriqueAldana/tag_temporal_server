@@ -182,15 +182,21 @@ CREATE TABLE orders(
   FOREIGN KEY(id_address) REFERENCES `address` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-CREATE TABLE order_has_products(
+
+CREATE TABLE `order_has_products` (
   `id_order` bigint NOT NULL,
-  `id_product` BIGINT NOT NULL,
-  `quantity` BIGINT NULL,
-  `started_date` BIGINT NOT NULL,
-  `ended_date` BIGINT NOT NULL,
+  `id_product` bigint NOT NULL,
+  `quantity` bigint DEFAULT NULL,
+  `started_date` bigint NOT NULL,
+  `ended_date` bigint NOT NULL,
+  `status_product` varchar(90) NOT NULL DEFAULT 'ASIGNADO' COMMENT 'ASIGNADO  ENCAMINO VISITADO COMPLETADO CANCELADO',
+  `lat` double DEFAULT NULL,
+  `lng` double DEFAULT NULL,
   `created_at` timestamp NOT NULL,
   `updated_at` timestamp NOT NULL,
-  PRIMARY KEY(id_order,id_product),
-  FOREIGN KEY(id_order) REFERENCES `orders` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  FOREIGN KEY(id_product) REFERENCES `products` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-);
+  PRIMARY KEY (`id_order`,`id_product`),
+  UNIQUE KEY `idord_idprod_startdate` (`id_order`,`id_product`,`started_date`),
+  KEY `id_product` (`id_product`),
+  CONSTRAINT `order_has_products_ibfk_1` FOREIGN KEY (`id_order`) REFERENCES `orders` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `order_has_products_ibfk_2` FOREIGN KEY (`id_product`) REFERENCES `products` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+); 

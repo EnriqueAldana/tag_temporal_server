@@ -6,6 +6,19 @@ const logger = require ('morgan');
 const cors = require('cors');
 const passport = require('passport');
 const multer = require('multer');
+const io = require('socket.io')(server);
+const mercadopago = require('mercadopago');
+mercadopago.configure({
+    sandbox: true,
+    access_token: 'TEST-3528176840473483-070618-069af9a0a8b90efeea7a35750d39c7bd-212447326'
+});
+
+
+/*
+* Importar Sockets
+*/
+const ordersSocket = require('./sockets/ordersSocket');
+
 /*
 * Importar rutas
 */
@@ -15,11 +28,17 @@ const categoriesRoutes = require('./routes/categoryRoutes');
 const productRoutes = require('./routes/productRoutes');
 const addressRoutes = require('./routes/addressRoutes');
 const ordersRoutes = require('./routes/orderRoutes');
+const order_has_productRoutes = require('./routes/order_has_productRoutes');
+const mercadoPagoRoutes = require('./routes/mercadoPagoRoutes');
+
 
 const port = process.env.PORT || 3000;
 const ip = '192.168.1.66';
 
 app.set('port',port);
+
+
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({
@@ -38,6 +57,13 @@ const upload = multer(
     }
     );
 
+
+/*
+* Llamado a  SOCKETS
+* http://192.168.1.66:3000/orders/visitor
+*/
+ordersSocket(io);
+
 /*
 * Llamado de  rutas
 */
@@ -46,6 +72,8 @@ categoriesRoutes(app);
 productRoutes(app, upload);
 addressRoutes(app);
 ordersRoutes(app);
+order_has_productRoutes(app);
+mercadoPagoRoutes(app);
 
 server.listen(3000,ip || 'localhost', function() {
     console.log('Aplicacion tagTemporal Servidor en Node JS con pid ' + process.pid + ' iniciada...' + ' en el puerto: ' + port);
